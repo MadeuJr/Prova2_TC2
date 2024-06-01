@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    padding: 0;
+    margin: 0;
+}
+html{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #e6a169;
+}
+
+
+.bg-1{
+    background-color: #ffebc6;
+}
