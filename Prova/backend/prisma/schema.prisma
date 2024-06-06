@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Counter {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+  seq  Int
+}
+
+model Sala {
+  id      Int @id @map("_id")
+  numero  Int
+  filas   Int
+  colunas Int
+}
+
+model Sessao {
+  id       Int       @id @map("_id")
+  filmeId  Int
+  salaId   Int
+  dia      DateTime
+  horario  String
+  assentos Assento[]
+  Venda    Venda[]
+}
+
+model Assento {
+  id        Int     @id @map("_id")
+  fila      Int
+  coluna    Int
+  reservado Boolean
+  Sessao    Sessao? @relation(fields: [sessaoId], references: [id])
+  sessaoId  Int?
+  Venda     Venda?  @relation(fields: [vendaId], references: [id])
+  vendaId   Int?
+}
+
+model Venda {
+  id         Int       @id @map("_id")
+  sessaoId   Int
+  sessao     Sessao    @relation(fields: [sessaoId], references: [id])
+  assentos   Assento[]
+  valorTotal Float
+}
