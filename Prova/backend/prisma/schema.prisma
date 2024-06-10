@@ -21,36 +21,29 @@ model Counter {
 
 model Sala {
   id      Int @id @map("_id")
-  numero  Int
-  filas   Int
-  colunas Int
+  lugares Int
+
+  @@map("Sala")
 }
 
 model Sessao {
-  id       Int       @id @map("_id")
-  filmeId  Int
-  salaId   Int
-  dia      DateTime
-  horario  String
-  assentos Assento[]
-  Venda    Venda[]
-}
+  id      Int       @id @map("_id")
+  filmeId Int
+  salaId  Int
+  dia     DateTime
+  horario String
+  lugares Boolean[]
+  Venda   Venda[]
 
-model Assento {
-  id        Int     @id @map("_id")
-  fila      Int
-  coluna    Int
-  reservado Boolean
-  Sessao    Sessao? @relation(fields: [sessaoId], references: [id])
-  sessaoId  Int?
-  Venda     Venda?  @relation(fields: [vendaId], references: [id])
-  vendaId   Int?
+  @@map("Sessao")
 }
 
 model Venda {
-  id         Int       @id @map("_id")
+  id         Int    @id @map("_id")
   sessaoId   Int
-  sessao     Sessao    @relation(fields: [sessaoId], references: [id])
-  assentos   Assento[]
+  sessao     Sessao @relation(fields: [sessaoId], references: [id])
+  lugares    Int[]
   valorTotal Float
+
+  @@map("Venda")
 }
