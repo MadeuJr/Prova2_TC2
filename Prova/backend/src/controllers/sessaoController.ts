@@ -161,6 +161,37 @@ export class SessaoController {
         }
     }
 
+    async findAllSessoesAsc(): Promise<
+        | {
+              id: number;
+              filmeId: number;
+              salaId: number;
+              dia: Date;
+              horario: string;
+              lugares: boolean[];
+          }[]
+        | null
+    > {
+        try {
+            const sessoes: Sessao[] | null =
+                await prismaClient.sessao.findMany({
+                    orderBy:{
+                        dia: 'asc',
+                    }
+                });
+            sessoes != null
+                ? this._res.status(200).json(sessoes)
+                : this._res
+                      .status(404)
+                      .json({ message: 'Nenhuma sala encontrada' });
+            return sessoes;
+        } catch (error) {
+            this._res.status(400).json({ message: error });
+            console.error(error);
+            return null;
+        }
+    }
+
     async updateSessao(): Promise<{
         id: number;
         filmeId: number;
