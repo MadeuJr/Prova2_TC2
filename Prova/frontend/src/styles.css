@@ -10,7 +10,14 @@ html{
     background-color: #e6a169;
 }
 
+body{
+    background-color: #e6a169 !important
+}
 
 .bg-1{
     background-color: #ffebc6;
+}
+
+.bg-2{
+    background-color: #f3efef;
 }
