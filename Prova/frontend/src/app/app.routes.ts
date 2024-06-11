@@ -14,44 +14,29 @@ import { SalasAllComponent } from './components/sala/salas-all/salas-all.compone
 import { SessaoAllComponent } from './components/sessao/sessao-all/sessao-all.component';
 import { SessaoInfoComponent } from './components/sessao/sessao-info/sessao-info.component';
 
-CadastraSessaoComponent
-CadastroSalaComponent
-CadastraVendaComponent
-DeletaSalaComponent
-DeletaSessaoComponent
-VendaAllComponent
-VendaInfoComponent
-SalaInfoComponent
-SalasAllComponent
-SessaoAllComponent
-SessaoInfoComponent
-AtualizaSalaComponent
-AtualizaSessaoComponent
-
 export const routes: Routes = [
     {path:'', component: HomeComponent, pathMatch:'full'},
     
     //Salas
     
-    {path:'sala/:id', component: SalaInfoComponent, pathMatch:'full'},
     {path:'sala', component: SalasAllComponent, pathMatch:'full'},
-    {path:'sala/cadastrar', component: CadastroSalaComponent, pathMatch:'full'},
+    {path:'sala/cadastrar', component: CadastroSalaComponent},
+    {path:'sala/:id', component: SalaInfoComponent},
     {path:'sala/atualizar/:id', component: AtualizaSalaComponent, pathMatch:'full'},
     {path:'sala/deletar/:id', component: DeletaSalaComponent, pathMatch:'full'},
 
     //Sessões
 
-    {path:'sessao/:id', component: SessaoInfoComponent, pathMatch:'full'},
     {path:'sessao', component: SessaoAllComponent, pathMatch:'full'},
-    {path:'sessao/cadastrar', component: CadastraSessaoComponent, pathMatch:'full'},
-    {path:'sessao/atualizar/:id', component: AtualizaSessaoComponent, pathMatch:'full'},
-    {path:'sessao/deletar/:id', component: DeletaSessaoComponent, pathMatch:'full'},
+    {path:'sessao/cadastrar', component: CadastraSessaoComponent},
+    {path:'sessao/:id', component: SessaoInfoComponent},
+    {path:'sessao/atualizar/:id', component: AtualizaSessaoComponent},
+    {path:'sessao/deletar/:id', component: DeletaSessaoComponent},
 
     //Venda 
 
-    {path:'venda/:id', component: VendaInfoComponent, pathMatch:'full'},
-    {path:'venda/', component: VendaAllComponent, pathMatch:'full'},
-    {path:'venda/cadastrar', component: CadastraVendaComponent, pathMatch:'full'},
+    {path:'venda', component: VendaAllComponent, pathMatch:'full'},
+    {path:'venda/cadastrar', component: CadastraVendaComponent},
+    {path:'venda/:id', component: VendaInfoComponent},
 
-    // {path: 'comp2', component: Rota2Component, pathMatch: 'full'}
 ];
