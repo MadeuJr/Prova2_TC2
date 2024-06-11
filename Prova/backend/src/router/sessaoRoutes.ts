@@ -11,7 +11,7 @@ sessaoRouter.get('/sessao', (req: Request, res: Response) => {
     return new SessaoController(req, res).findAllSessoes();
 });
 
-sessaoRouter.post('/sessao/create', (req: Request, res: Response) => {
+sessaoRouter.post('/sessao', (req: Request, res: Response) => {
     return new SessaoController(req, res).createSessao();
 });
 

@@ -16,7 +16,7 @@ export class SessaoController {
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: environment.API_TOKEN,
+                Authorization: "Bearer " + environment.API_TOKEN,
             },
         };
 
@@ -26,6 +26,7 @@ export class SessaoController {
         )
             .then((response) => response.json())
             .then((response) => {
+
                 if (response.success === false) {
                     return false;
                 } else return true;
@@ -66,10 +67,12 @@ export class SessaoController {
             horario: string;
         };
         try {
-            let nexSeq: number = await this.getNextSequenceValue();
             const filme = await this.verificaFilme(idFilme);
             const sala = await this.verificaSala(idSala);
-            if (filme === true || sala !== null) {
+            console.log(filme);
+            
+            if (filme === true && sala !== null) {
+                let nexSeq: number = await this.getNextSequenceValue();
                 await prismaClient.sessao.create({
                     data: {
                         id: nexSeq,
@@ -82,6 +85,18 @@ export class SessaoController {
                 });
                 this._res.status(200).json({
                     message: `Cadastro da sessão com ID ${nexSeq} realizado com sucesso`,
+                });
+            } else if (filme === false && sala === null) {
+                this._res.status(400).json({
+                    message: `Sala e Filme enviados para cadastro da sessão são inválidos`,
+                });
+            } else if (filme === false && sala !== null) {
+                this._res.status(400).json({
+                    message: `Filme enviado para cadastro da sessão são inválidos`,
+                });
+            } else {
+                this._res.status(400).json({
+                    message: `Sala enviada para cadastro da sessão são inválidos`,
                 });
             }
         } catch (error) {
@@ -154,16 +169,17 @@ export class SessaoController {
         horario: string;
         lugares: boolean[];
     } | null> {
-        const { idSessao, idFilme, dataSessao, horario, sessaoLugares } = this._req.body as {
+        const { idSessao, idFilme, dataSessao, horario, sessaoLugares } = this
+            ._req.body as {
             idSessao: number;
             idFilme: number;
             dataSessao: Date;
             horario: string;
-            sessaoLugares : boolean[]
+            sessaoLugares: boolean[];
         };
         try {
             const filme = await this.verificaFilme(idFilme);
-            if (filme === true ) {
+            if (filme === true) {
                 const sessao: Sessao = await prismaClient.sessao.update({
                     where: { id: idSessao },
                     data: {
@@ -178,11 +194,9 @@ export class SessaoController {
                 });
                 return sessao;
             } else {
-                this._res
-                    .status(404)
-                    .json({
-                        message: `Sala com ID ${idSessao} não encontrado`,
-                    });
+                this._res.status(404).json({
+                    message: `Sessao com ID ${idSessao} não encontrado ou filme inválido`,
+                });
                 return null;
             }
         } catch (error) {

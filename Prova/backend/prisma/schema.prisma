@@ -42,8 +42,8 @@ model Venda {
   id         Int    @id @map("_id")
   sessaoId   Int
   sessao     Sessao @relation(fields: [sessaoId], references: [id])
-  lugares    Int[]
-  valorTotal Float
+  lugar    Int
+  valorTotal Float @default(20)
 
   @@map("Venda")
 }

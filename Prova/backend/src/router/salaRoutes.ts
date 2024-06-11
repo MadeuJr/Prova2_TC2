@@ -3,22 +3,22 @@ import { SalaController } from '../controllers/salaController';
 
 const salaRouter = Router();
 
-salaRouter.get('/sessao/:id', async (req: Request, res: Response) => {
+salaRouter.get('/sala/:id', async (req: Request, res: Response) => {
     return await new SalaController(req, res).findOneSala();
 });
 
-salaRouter.get('/sessao', async (req: Request, res: Response) => {
+salaRouter.get('/sala', async (req: Request, res: Response) => {
     return await new SalaController(req, res).findAllSalas();
 });
 
-salaRouter.post('/sessao', async (req: Request, res: Response) => {
+salaRouter.post('/sala', async (req: Request, res: Response) => {
     return await new SalaController(req, res).createSala();
 });
 
-salaRouter.put('/sessao', async (req: Request, res: Response) => {
+salaRouter.put('/sala', async (req: Request, res: Response) => {
     return await new SalaController(req, res).updateSala();
 });
-salaRouter.delete('/sessao/:id', async (req: Request, res: Response) => {
+salaRouter.delete('/sala/:id', async (req: Request, res: Response) => {
     return await new SalaController(req, res).deleteSala();
 });
 
