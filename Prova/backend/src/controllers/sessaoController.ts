@@ -161,7 +161,7 @@ export class SessaoController {
         }
     }
 
-    async findAllSessoesAsc(): Promise<
+    async findAllSessoesDesc(): Promise<
         | {
               id: number;
               filmeId: number;
@@ -176,7 +176,7 @@ export class SessaoController {
             const sessoes: Sessao[] | null =
                 await prismaClient.sessao.findMany({
                     orderBy:{
-                        dia: 'asc',
+                        dia: 'desc',
                     }
                 });
             sessoes != null

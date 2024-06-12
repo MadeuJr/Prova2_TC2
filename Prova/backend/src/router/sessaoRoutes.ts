@@ -3,16 +3,17 @@ import { SessaoController } from '../controllers/sessaoController';
 
 const sessaoRouter = Router();
 
-sessaoRouter.get('/sessao/:id', async (req: Request, res: Response) => {
-    return await new SessaoController(req, res).findOneSessao();
-});
 
 sessaoRouter.get('/sessao', (req: Request, res: Response) => {
-    return new SessaoController(req, res).findAllSessoes();
+  return new SessaoController(req, res).findAllSessoes();
 });
 
 sessaoRouter.get('/sessao/asc', (req: Request, res: Response) => {
-    return new SessaoController(req, res).findAllSessoesAsc();
+  return new SessaoController(req, res).findAllSessoesDesc();
+});
+
+sessaoRouter.get('/sessao/:id', async (req: Request, res: Response) => {
+    return await new SessaoController(req, res).findOneSessao();
 });
 
 sessaoRouter.post('/sessao', (req: Request, res: Response) => {

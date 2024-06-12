@@ -1,5 +1,28 @@
-<div class="d-flex bg-2 m-5 rounded shadow border border-2">
-    <div class="m-2">
-        <p>Home</p>
+<div *ngIf="loading" class="loader">
+    <div class="loader d-flex bg-2 m-5 rounded shadow border border-2 justify-content-center">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle
+                class="path"
+                cx="50"
+                cy="50"
+                r="20"
+                fill="none"
+                stroke-width="2"
+                stroke-miterlimit="10"
+            />
+        </svg>
+    </div>
+</div>
+
+<div *ngIf="!loading" class="d-flex bg-2 m-5 rounded shadow border border-2 justify-content-center flex-column">
+    <div class="m-2 d-flex justify-content-center">
+        <h3>Ultimas Sessões</h3>
+    </div>
+    <div *ngFor="let sessao of sessoes; index as i; trackBy: trackBySessaoId">
+            <div class="d-flex justify-content-center">
+                <p>Sessão: {{sessao.id}}</p>
+                <img (click)="sessionDetails(sessao.id)" [src]="'https://media.themoviedb.org/t/p/w300' + filme[i]?.poster_path" style="width: 200px;">
+                <p>{{filme[i]?.title}}</p>
+            </div>
     </div>
 </div>

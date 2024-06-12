@@ -16,7 +16,7 @@ export class FilmesService {
     private HTTP = inject(HttpClient);
     constructor() {}
 
-    public getFilme() {
-        return this.HTTP.get(`${API_URL}/3?language=pt-BR`, { headers: HEADERS });
+    public getFilme(idFilme: number) {
+        return this.HTTP.get(`${API_URL}/${idFilme}?language=pt-BR`, { headers: HEADERS });
     }
 }
